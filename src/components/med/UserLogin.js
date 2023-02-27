@@ -17,6 +17,8 @@ function UserLogin() {
       email:email,
       password:password
     }
+    
+    console.log(user)
 
     try {
 
@@ -43,7 +45,7 @@ function UserLogin() {
       }
 
     } catch (error) {
-
+  console.log(error)
     }
   }
 
