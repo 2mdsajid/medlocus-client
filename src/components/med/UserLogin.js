@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import ROOT from '../Const';q
+import ROOT from '../Const';
 import Cookies from 'js-cookie';
 
 function UserLogin() {
@@ -30,7 +30,7 @@ function UserLogin() {
 
       const data = await res.json()
       console.log('data received after login',data)
-//       Cookies.set('logintoken',data.logintoken)
+      Cookies.set('logintoken',data.logintoken)
 
 
       if (data.status === 422 || !data) {
