@@ -21,7 +21,7 @@ function UserLogin() {
     try {
 
       const res = await fetch(ROOT+"/userlogin", {
-//         mode: 'no-cors',
+        mode: 'no-cors',
         method: "POST",
         headers: {
           "Content-Type": "application/json"
