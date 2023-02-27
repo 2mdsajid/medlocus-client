@@ -1,3 +1,3 @@
-const ROOT = 'https://medlocserver.adaptable.app/'
+const ROOT = 'https://medlocserver.adaptable.app'
 
 export default ROOT
