@@ -42,21 +42,17 @@ function UserProfile() {
 
 
     const renderuserProfile = async () => {
-        try {
+        const logintoken = Cookies.get("logintoken")
+        console.log('logintoken',logintoken)
 
+        try {
             const res = await fetch(ROOT+'/userprofile', {
                 mode: 'no-cors',
-                method: 'GET',
+                method: 'POST',
                 headers: {
-                    // because there is cookies
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                 credentials: "same-origin" ,
-                withCredentials: true, 
-
-                // bwcause cookies is there
-                credentials: 'include'
+                    "Content-Type": "application/json"
+                  },
+                  body: JSON.stringify(logintoken)
             })
             
             console.log('before getting data')
