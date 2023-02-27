@@ -45,6 +45,7 @@ function UserProfile() {
         try {
 
             const res = await fetch(ROOT+'/userprofile', {
+                mode: 'no-cors',
                 method: 'GET',
                 headers: {
                     // because there is cookies
@@ -59,7 +60,7 @@ function UserProfile() {
             const data = await res.json()
             setuserInfo(data)
             setuserTests(data.tests)
-            // console.log(data)
+            console.log(data)
 
 
             if (data.status == 401) {
