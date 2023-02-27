@@ -52,9 +52,10 @@ function UserProfile() {
                     Accept: 'application/json',
                     'Content-Type': 'application/json'
                 },
+                 credentials: "same-origin" 
 
                 // bwcause cookies is there
-                credentials: 'include'
+//                 credentials: 'include'
             })
 
             const data = await res.json()
