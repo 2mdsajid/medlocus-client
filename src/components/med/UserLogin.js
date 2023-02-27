@@ -28,7 +28,7 @@ function UserLogin() {
       })
 
       const data = await res.json()
-      console.log(data)
+      console.log('data received after login',data)
 
 
       if (data.status === 422 || !data) {
