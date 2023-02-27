@@ -30,6 +30,7 @@ function UserLogin() {
 
       const data = await res.json()
       console.log('data received after login',data)
+      Cookies.set('logintoken',data.logintoken)
 
 
       if (data.status === 422 || !data) {
@@ -37,7 +38,7 @@ function UserLogin() {
       } else {
         console.log('success')
         
-        Cookies.set('logintoken',data.logintoken)
+        
         
         history('/userprofile')
         console.log('user logged in')
