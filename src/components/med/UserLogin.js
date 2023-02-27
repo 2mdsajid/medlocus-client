@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
-import ROOT from '../Const';
+import ROOT from '../Const';q
+import Cookies from 'js-cookie';
 
 function UserLogin() {
 
@@ -37,6 +38,9 @@ function UserLogin() {
         console.log('invalid')
       } else {
         console.log('success')
+        
+        Cookies.set('logintoken',data.logintoken)
+        
         history('/userprofile')
         console.log('user logged in')
       }
