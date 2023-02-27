@@ -20,6 +20,7 @@ function UserLogin() {
     try {
 
       const res = await fetch(ROOT+"/userlogin", {
+        mode: 'no-cors',
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -28,7 +29,7 @@ function UserLogin() {
       })
 
       const data = await res.json()
-      // console.log(data)
+      console.log(data)
 
 
       if (data.status === 422 || !data) {
@@ -36,6 +37,7 @@ function UserLogin() {
       } else {
         console.log('success')
         history('/userprofile')
+        console.log('user logged in')
       }
 
     } catch (error) {
