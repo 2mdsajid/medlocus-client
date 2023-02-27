@@ -52,10 +52,11 @@ function UserProfile() {
                     Accept: 'application/json',
                     'Content-Type': 'application/json'
                 },
-                 credentials: "same-origin" 
+                 credentials: "same-origin" ,
+                withCredentials: true, 
 
                 // bwcause cookies is there
-//                 credentials: 'include'
+                credentials: 'include'
             })
             
             console.log('before getting data')
