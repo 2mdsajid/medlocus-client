@@ -57,7 +57,8 @@ function UserProfile() {
                 // bwcause cookies is there
 //                 credentials: 'include'
             })
-
+            
+            console.log('before getting data')
             const data = await res.json()
             setuserInfo(data)
             setuserTests(data.tests)
@@ -67,10 +68,12 @@ function UserProfile() {
             if (data.status == 401) {
                 history('/login')
                 setloggedIn(false)
+                console.log('after  getting 401')
             }
 
         } catch (error) {
             console.log(error)
+            console.log('before getting error')
             // history('/test/login')
         }
     }
