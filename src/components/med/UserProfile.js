@@ -87,7 +87,7 @@ function UserProfile() {
         // console.log('logintoken in profile', logintoken)
 
         try {
-            const res = await fetch('/userprofile', {
+            const res = await fetch(ROOT+'/userprofile', {
                 // mode: 'no-cors',
                 method: 'POST',
                 headers: {
