@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
 import ROOT from '../Const';
+
+import { storelocalStorage } from './functions';
+
 import Cookies from 'js-cookie';
 
 function UserLogin() {
@@ -17,13 +20,10 @@ function UserLogin() {
       email:email,
       password:password
     }
-    
-    console.log(user)
 
     try {
 
       const res = await fetch(ROOT+"/userlogin", {
-        
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -32,20 +32,23 @@ function UserLogin() {
       })
 
       const data = await res.json()
-      console.log('data received after login',data)
-      Cookies.set('logintoken',data.logintoken)
+      // console.log(data)
 
 
       if (data.status === 422 || !data) {
         console.log('invalid')
       } else {
+
+        Cookies.set('logintoken',data.logintoken)
+        // console.log('logintoken',data.logintoken)
+        storelocalStorage('logintoken',data.logintoken)
         console.log('success')
         history('/userprofile')
-        console.log('user logged in')
       }
 
     } catch (error) {
-  console.log(error)
+      console.log(error)
+
     }
   }
 
