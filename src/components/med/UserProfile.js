@@ -19,7 +19,7 @@ function UserProfile() {
         // console.log('logout')
         setloggedIn(false)
 
-        const res = await fetch(ROOT+'/logout', {
+        const res = await fetch(ROOT + '/logout', {
             method: 'GET',
             headers: {
                 // because there is cookies
@@ -31,46 +31,91 @@ function UserProfile() {
             credentials: 'include'
         })
 
+        Cookies.remove('logintoken')
+
         // const data = await res.json()
 
         // console.log(data)
-
         const user_type = Cookies.get("usertype")
         history2('/home', { state: { id: user_type } })
+    }
 
-      }
+
+    // const renderuserProfile = async () => {
+    //     console.log('render user profile')
+
+    //     const logintoken = Cookies.get("logintoken")
+    //     console.log('logintoken',logintoken)
+
+    //     try {
+    //         const res = await fetch(ROOT+'/userprofile', {
+    //             mode: 'no-cors',
+    //             method: 'GET',
+    //             headers: {
+    //                 // because there is cookies
+    //                 Accept: 'application/json',
+    //                 'Content-Type': 'application/json'
+    //             },
+
+    //             // bwcause cookies is there
+    //             credentials: 'include'
+    //         })
+
+    //         const data = await res.json()
+    //         setuserInfo(data)
+    //         setuserTests(data.tests)
+    //         console.log(data)
+
+
+    //         if (data.status == 401) {
+    //             history('/login')
+    //             setloggedIn(false)
+    //         }
+
+    //     } catch (error) {
+    //         console.log(error)
+    //         // history('/login')
+    //         // history('/test/login')
+    //     }
+    // }
 
 
     const renderuserProfile = async () => {
+        // console.log('render user profile')
+
         const logintoken = Cookies.get("logintoken")
-        console.log('logintoken',logintoken)
+        // console.log('logintoken in profile', logintoken)
 
         try {
-            const res = await fetch(ROOT+'/userprofile', {
-                mode: 'no-cors',
+            const res = await fetch('/userprofile', {
+                // mode: 'no-cors',
                 method: 'POST',
                 headers: {
                     "Content-Type": "application/json"
-                  },
-                  body: JSON.stringify(logintoken)
+                },
+                body: JSON.stringify({
+                    logintoken: logintoken,
+                    
+                })
             })
-            
-            console.log('before getting data')
+
+            // console.log('token profile',logintoken)
+
             const data = await res.json()
             setuserInfo(data)
             setuserTests(data.tests)
-            console.log(data)
+            console.log('data in profile after auth', data)
 
 
             if (data.status == 401) {
                 history('/login')
+                console.log('direct to login ')
                 setloggedIn(false)
-                console.log('after  getting 401')
             }
 
         } catch (error) {
             console.log(error)
-            console.log('before getting error')
+            // history('/login')
             // history('/test/login')
         }
     }
@@ -93,7 +138,7 @@ function UserProfile() {
         renderuserProfile()
 
         // userLoggedIn().then(result => console.log(result.PromiseResult))
-        
+
 
         // check()
 
@@ -124,7 +169,7 @@ function UserProfile() {
                 </>)
             })}
         </div> : <p>please log in to view your profile</p>}
-        </>
+    </>
     )
 }
 
