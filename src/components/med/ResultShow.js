@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom';
 // import { objData } from './Quiz'
@@ -39,12 +40,14 @@ function ResultShow() {
     const location = useLocation();
 
     const username = location.state.username;
+    const logintoken = Cookies.get("logintoken")
 
     // SHIW ANSWERS
 
     // SAVE TEST DATA IN THE RESPECTIVE USERS DATABASE
     const saveTestToUser = async (testmode, testtitle, totalscore, totalwrong, unattempt, totaltimetaken, questions) => {
 
+        
         // const { testmode,testtitle,totalscore,totalwrong,unattempt,totaltimetaken,questions} = req.body
 
         const res = await fetch(ROOT+'/addtestdata', {
@@ -54,6 +57,7 @@ function ResultShow() {
             },
             // since database stores only string form
             body: JSON.stringify({
+                logintoken,
                 testmode,
                 testtitle,
                 totalscore,
@@ -133,7 +137,10 @@ function ResultShow() {
 
                 // bwcause cookies is there
                 credentials: 'include',
-                body: JSON.stringify({ testmode: objData.testmode })
+                body: JSON.stringify({ 
+                    logintoken:logintoken,
+                    testmode: objData.testmode 
+                })
             })
 
             const data = await res.json()
