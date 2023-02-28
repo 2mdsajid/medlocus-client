@@ -8,6 +8,7 @@ import Timer from './re-comp/Timer';
 import ROOT from '../Const';
 
 import names from 'random-indian-name'
+import Cookies from 'js-cookie';
 // var names = require();
 
 // GET INPUT FROM THE ANSWERS
@@ -83,15 +84,17 @@ const CollectUserData = () => {
 
     // TO GET THE USERNAME IF USER LOGGED IN
     const getUserName = async () => {
+        const logintoken = Cookies.get("logintoken")
         try {
             const res = await fetch(ROOT+'/getusername', {
-                method: 'GET',
-                headers: {
-                    // because there is cookies
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                credentials: 'include'
+                 // mode: 'no-cors',
+                 method: 'POST',
+                 headers: {
+                     "Content-Type": "application/json"
+                 },
+                 body: JSON.stringify({
+                     logintoken: logintoken
+                 })
             })
             const data = await res.json()
 
