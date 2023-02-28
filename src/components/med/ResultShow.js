@@ -148,7 +148,7 @@ function ResultShow() {
                 setoverallResult(data)
                 const sortedData = [...overallresult].sort((a, b) => a.totalscore - b.totalscore)
                 console.log(sortedData)
-                // setoverallResult(sortedData)
+                setoverallResult(sortedData)
                 setshowoverResult(true)
             } else {
                 setnotloggedText('please log in to see overall result')
